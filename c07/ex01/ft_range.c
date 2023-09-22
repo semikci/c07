@@ -6,7 +6,7 @@
 /*   By: sekmekci <sekmekci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 09:25:11 by sekmekci          #+#    #+#             */
-/*   Updated: 2023/09/20 15:15:26 by sekmekci         ###   ########.fr       */
+/*   Updated: 2023/09/22 04:43:23 by sekmekci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	*ft_range(int min, int max)
+
+int ft_ultimate_range(int **range,int min, int max)
 {
-	int	*nbr;
-	int	i;
-	int	k;
-	int	j;
-
-	j = max - min;
-	k = 0;
-	if (min >= max)
-		return (NULL);
-	nbr = malloc((j) * sizeof(int));
-	i = min;
-	while (min <= i && max > i)
-	{
-		nbr[k] = i;
-		k++;
-		i++;
-	}
-	return (nbr);
+    int i;
+    int *result;
+    if (min >= max)
+    {
+        *range = 0;
+        return (0);
+    }
+    result = malloc(sizeof(int) * (max - min));
+    if (!result)
+    {
+        *range = 0;
+        return (-1);
+    }
+    *range = result;
+    i = 0;
+    while(min < max)
+    {
+        result[i] = min;
+        min++;
+        i++;
+    }
+    return (i);
 }
-
+#include <stdio.h>
 int main()
 {
-	int min;
-	int max;
-	int size;
-	int *tab;
-	int i;
-	
-	i = 0;
-	min = 20;
-	max = 30;
-	size = 10;
-	tab = ft_range(min, max);
-	while(max - min > i)
-	printf("%d\n", tab[i++]);
+    int i=0;
+    int *tab;
+    //int *a= ft_ultimate_range(&tab,3,5);
+    printf("%d\n",ft_ultimate_range(&tab,3,5));
+    while(tab[i])
+    {
+        printf("%d",tab[i]);
+        i++;
+    }
 }
