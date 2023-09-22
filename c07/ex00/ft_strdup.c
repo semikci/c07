@@ -6,7 +6,7 @@
 /*   By: sekmekci <sekmekci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 21:29:43 by sekmekci          #+#    #+#             */
-/*   Updated: 2023/09/15 12:44:33 by sekmekci         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:52:56 by sekmekci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@
 char	*ft_strdup(char	*src)
 {
 	src = malloc(sizeof(*src) * sizeof(char));
+	if(src == 0)
+	{
+		*src = 0;
+		return (0);
+	}
 	return (src);
-}
-
-int	main(void)
-{
-	char	*cp1 = "bilgisayar";
-	char	*cp2 = ft_strdup(cp1);
-
-	printf("%s", cp1);
-	printf("%s", cp2);
 }

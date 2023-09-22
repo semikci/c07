@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sekmekci <sekmekci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 15:34:59 by sekmekci          #+#    #+#             */
-/*   Updated: 2023/09/22 04:43:18 by sekmekci         ###   ########.fr       */
+/*   Created: 2023/09/22 10:12:54 by sekmekci          #+#    #+#             */
+/*   Updated: 2023/09/22 16:49:50 by sekmekci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	ft_size(char **strs, int size)
 
 	a = 0;
 	k = 1;
-	i = 0;
 	while (k < size)
 	{
+		i = 0;
 		while (strs[k][i])
 		{
 			a++;
@@ -35,23 +35,14 @@ int	ft_size(char **strs, int size)
 	return (a);
 }
 
-char	*ft_strjoin(int size, char **strs, char *sep)
+void	ft_assign(char **strs, char *sep, int size, char *str)
 {
-	char	*empty;
-	char	*str;
-	int		k;
-	int		i;
-	int		p;
+	int	k;
+	int	p;
+	int	i;
 
-	k = 1;
 	p = 0;
-	str = malloc(ft_size(strs, size) * 1 + 1);
-	if (str == (void *)0)
-	{
-		empty = malloc(1);
-		empty[0] = 0;
-		return (empty);
-	}
+	k = 0;
 	while (k < size)
 	{
 		i = 0;
@@ -62,7 +53,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 			p++;
 		}
 		i = 0;
-		while (sep[i])
+		while (sep[i] && k != size - 1)
 		{
 			str[p] = sep[i];
 			p++;
@@ -70,13 +61,21 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 		}
 		k++;
 	}
-	return (str);
+	str[p] = 0;
 }
 
-int	main(int size, char **strs)
+char	*ft_strjoin(int size, char **strs, char *sep)
 {
+	char	*empty;
 	char	*str;
-	char	seb[] = "bastır";
-	str = ft_strjoin(size, strs, seb);
-	printf("%s", str);
+
+	str = malloc(ft_size(strs, size) * 1 + 1);
+	if (str == (void *)0 || size == 0)
+	{
+		empty = malloc(1);
+		empty[0] = 0;
+		return (empty);
+	}
+	ft_assign(strs, sep, size, str);
+	return (str);
 }

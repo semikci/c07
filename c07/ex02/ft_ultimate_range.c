@@ -6,38 +6,37 @@
 /*   By: sekmekci <sekmekci@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:01:26 by sekmekci          #+#    #+#             */
-/*   Updated: 2023/09/22 04:43:21 by sekmekci         ###   ########.fr       */
+/*   Updated: 2023/09/22 16:45:29 by sekmekci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 int	ft_ultimate_range(int **range, int min, int max)
 {
-	int	*empty;
 	int	i;
-	int	k;
-	int	j;
+	int	*result;
 
-	j = max - min;
-	k = 0;
 	if (min >= max)
+	{
+		*range = 0;
 		return (0);
-	range = malloc(((j) * 4));
-	if (range == (void *)0)
-	{
-		empty = malloc(1);
-		empty[0] = 0;
-		return (empty);
 	}
-	i = min;
-	while (min <= i && max > i)
+	result = malloc(sizeof(int) * (max - min));
+	if (!result)
 	{
-		range[k] = i;
-		k++;
+		*range = 0;
+		return (-1);
+	}
+	*range = result;
+	i = 0;
+	while (min < max)
+	{
+		result[i] = min;
+		min++;
 		i++;
 	}
-	return (range);
+	return (i);
 }
-	
